@@ -11,8 +11,11 @@
 |
 */
 
+// ２　追加 クラスを読んでいるRouteの中のgetを呼び出している
+// Route::getこの書き方をするとnewしなくてもクラスを呼び出すことができる PHPのstaticメソッド、staticプロパティと言う
+Route::get('/', 'DiaryController@index')->name('diary.index'); 
+
+// １　使わないからコメントアウト
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get('/', 'DiaryController@index')->name('diary.index'); //追加
