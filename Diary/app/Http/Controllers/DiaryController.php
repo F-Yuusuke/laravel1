@@ -28,7 +28,7 @@ class DiaryController extends Controller
         return view('diaries.create');
     }
 
-    public function store()
+    public function store(Request $request)
 {
 
     $diary = new Diary(); //Diaryモデルをインスタンス化
