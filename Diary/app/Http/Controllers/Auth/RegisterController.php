@@ -28,7 +28,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // アカウント登録後のリダイレクト先を/homeから/に変更
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

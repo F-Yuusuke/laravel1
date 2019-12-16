@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Diary; // App/Diaryクラスを使用する宣言
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateDiary; // 追加
+use Illuminate\Support\Facades\Auth;
 
 class DiaryController extends Controller
 {
@@ -33,6 +34,7 @@ class DiaryController extends Controller
 
     $diary->title = $request->title;
     $diary->body = $request->body;
+    $diary->user_id = Auth::user()->id; //追加 ログインしてるユーザーのidを保存
     $diary->save();
     return redirect()->route('diary.index');
 }
