@@ -39,6 +39,8 @@ class DiaryController extends Controller
     return redirect()->route('diary.index');
 }
 
+
+
  public function destroy(Diary $diary)
 {
     if (Auth::user()->id !== $diary->user_id) {
@@ -66,20 +68,17 @@ public function edit(Diary $diary)
     ]);
 }
 
-public function update(Diary $diary)
+public function update(int $id, CreateDiary $request)
 {
+    $diary = Diary::find($id);
     if (Auth::user()->id !== $diary->user_id) {
-        abort(403);
+      abort(403);
     }
-    // $diary = Diary::find($id);
-
     $diary->title = $request->title; //画面で入力されたタイトルを代入
     $diary->body = $request->body; //画面で入力された本文を代入
     $diary->save(); //DBに保存
-
     return redirect()->route('diary.index'); //一覧ページにリダイレクト
 }
-
 }
 
 
