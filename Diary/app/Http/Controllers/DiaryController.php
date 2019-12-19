@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Diary; // App/Diaryクラスを使用する宣言
+// データベースとやりとりするためのコード
+use App\Diary; 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateDiary; // 追加
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +80,14 @@ public function update(Diary $diary)
     $diary->save(); //DBに保存
 
     return redirect()->route('diary.index'); //一覧ページにリダイレクト
+}
+
+// likeの後ろの（）ないがintのままでokなわけはいいねは誰でもできないと意味ないから diaryにしたのはログインした人だけ編集できるようにするため
+public function like(int $id)
+{
+    $diary = Diary::where('id', $id)->with('likes')->first();
+
+    $diary->likes()->attach(Auth::user()->id);
 }
 
 }
