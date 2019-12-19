@@ -83,6 +83,13 @@ public function update(Diary $diary)
     return redirect()->route('diary.index'); //一覧ページにリダイレクト
 }
 
+public function like(int $id)
+{
+    $diary = Diary::where('id', $id)->with('likes')->first();
+
+    $diary->likes()->attach(Auth::user()->id);
+}
+
 
 }
 
