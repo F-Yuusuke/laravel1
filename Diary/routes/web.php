@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('diary/{diary}/update', 'DiaryController@update')->name('diary.update');
     
     Route::delete('diary/{diary}/delete', 'DiaryController@destroy')->name('diary.destroy');
-    Route::post('diary/{id}/like', 'DiaryController@like');
-    Route::post('diary/{id}/dislike', 'DiaryController@dislike');    
+    Route::post('diary/{id}/like', 'DiaryController@like');//いいねできるのに必要id
+    Route::post('diary/{id}/dislike', 'DiaryController@dislike');//いいね取り消しに必要id
 });
 
 Auth::routes();
@@ -40,7 +40,7 @@ Route::delete('diary/{diary}/delete', 'DiaryController@destroy')->name('diary.de
 Route::get('diary/{diary}/edit', 'DiaryController@edit')->name('diary.edit'); // 編集画面
 Route::put('diary/{diary}/update', 'DiaryController@update')->name('diary.update'); //更新処理
 
-// １　使わないからコメントアウト
+// １ 使わないからコメントアウト
 // Route::get('/', function () {
 //     return view('welcome');
 // });

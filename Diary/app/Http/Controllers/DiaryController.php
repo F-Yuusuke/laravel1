@@ -83,11 +83,32 @@ public function update(Diary $diary)
 }
 
 // likeの後ろの（）ないがintのままでokなわけはいいねは誰でもできないと意味ないから diaryにしたのはログインした人だけ編集できるようにするため
+// laravelアップデートのためコード変更
+// public function like(int $id)
+// {
+//     $diary = Diary::where('id', $id)->with('likes')->first();
+
+//     $diary->likes()->attach(Auth::user()->id);
+// }
+
+
+// １１いいねが押されたらデータとして残り数字が変更するようにした
 public function like(int $id)
 {
     $diary = Diary::where('id', $id)->with('likes')->first();
-
     $diary->likes()->attach(Auth::user()->id);
+    // 通信が成功したことを返す
+    return response()
+        ->json(['success' => 'いいね完了！']);
+}
+
+// ２２いいねの取り消し
+public function dislike(int $id)
+{
+    $diary = Diary::where('id', $id)->with('likes')->first();
+    $diary->likes()->detach(Auth::user()->id);
+    // 通信が成功したことを返す
+    return response()->json(['success' => 'いいね完了！']);
 }
 
 }

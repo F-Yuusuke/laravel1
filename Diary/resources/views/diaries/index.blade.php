@@ -23,10 +23,19 @@
         <button class="btn btn-danger">削除</button>
     </form>
 @endif 
+
+<!-- ２４ここでは自分がいいねしていたらリロードしてもそのいいねを前にしたやつがキープされているようにする -->
 <div class=" mt-3 ml-3">
-    <i class="far fa-heart fa-lg text-danger js-like"></i>
-    <input class="diary-id" type="hidden" value="{{ $diary->id }}">
-    <span class="js-like-num">200</span>
+   @if (Auth::check() && $diary->likes->contains(function ($user) {
+       return $user->id === Auth::user()->id;
+   }))
+       <i class="fas fa-heart fa-lg text-danger js-dislike"></i>
+   @else
+       <i class="far fa-heart fa-lg text-danger js-like"></i>
+   @endif
+   <input class="diary-id" type="hidden" value="{{ $diary->id }}">
+    <!-- １４いいねの数が何個あるか取得してその数字を取得するように200という文字を消してspanの中を編集 -->
+   <span class="js-like-num">{{ $diary->likes->count() }}</span>
 </div>
         </form>
     </form>
